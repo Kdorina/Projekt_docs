@@ -127,4 +127,17 @@
 
 * File
 
+    | Metódus | Elérés  | Kontroller | Védett |
+    | ------- | ------- | ---------- |----------- |
+    | GET    | image| FileController| igen |
+    | POST    | images| FileController| Igen |
+    | DELETE    | deleteImages/{id}| FileController| igen |
+    | Get    | countfile| FileController| Igen |
 * Note
+
+    | Metódus | Elérés  | Kontroller | Védett |
+    | ------- | ------- | ---------- |----------- |
+    | GET    | note| NoteController| igen |
+    | POST    | notes| NoteController| Igen |
+    | DELETE    | deleteNotes/{id}| NoteController| igen |
+    | Get    | countNote| NoteController| Igen |
