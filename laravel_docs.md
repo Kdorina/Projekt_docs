@@ -105,7 +105,7 @@ Az adatok átadása frontend részére
 Az authentikáció érdekében Sanctum csomag lett feltelepítve
 ## AuthController
 
-    Az AuthController osztély végzi a regisztrációt, bejelentkezést, kijelentekzést és az admin számára adatok lekérdezését.
+    Az AuthController osztály végzi a regisztrációt, bejelentkezést, kijelentekzést és az admin számára adatok lekérdezését.
 
  Metódusok: 
 
@@ -135,6 +135,8 @@ Az authentikáció érdekében Sanctum csomag lett feltelepítve
     
 
 ## AdminController
+  Az AdminController osztály végzi a regisztrációt, bejelentkezést, kijelentekzést.
+
  Metódusok: 
 
     login()
@@ -155,6 +157,8 @@ Az authentikáció érdekében Sanctum csomag lett feltelepítve
     Ez a metódus egy JSON választ küld vissza, mely hiba üzenetet generál , error, errorMessage és az aktuális code mezőt tartalmazza. A metódus alapértelmezettként a 404 hibakódot adja vissza.
 
 ## FileController
+  A FileController osztály végzi a képek + leírások megjelenítését, felvételét, törlését a felhasználó számára, illetve a felvett fájlok megszámlálásának lekérdezését.
+
 Metódusok:
 
     index()
@@ -164,7 +168,7 @@ Metódusok:
     Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál.
     $id = Auth::user()->getId() -> új kép sikeres felvétele esetén, a bejelentkezett felhasználó id-ját eltárolja $id-ban majd ezt kapja meg a user_id.
     A metódus Request objektumot kap, melynek description, imgpath mezője elvárt.
-    if(!$request->hasFile('imgpath') && !$request->file('imgpath')->isValid()) függvénny arra szolgál, ha az elvárt kép nem lett kiválasztva, akkor hibára fut akkor a hiba üzenet "error":" kérlek válaszd ki a képet". Ha sikeres a validáció, akkor újleírást és képet getClientOriginalName() függvény használatával a feltöltött képet eredeti nevén menti el az adatbázisban, majd a storeAs() függvénnyel eltárolja a storgage mappa    'public' al mappájában. Az adatokat visszaküldi a FileResource használatával, majd 'sikeres felvétel' üzenetet ad vissza.
+    if(!$request->hasFile('imgpath') && !$request->file('imgpath')->isValid()) függvénny arra szolgál, ha az elvárt kép nem lett kiválasztva, akkor hibára fut akkor a hiba üzenet "error":" kérlek válaszd ki a képet". Ha sikeres a validáció, akkor újleírást és képet getClientOriginalName() függvény használatával a feltöltött képet eredeti nevén menti el az adatbázisban, majd a storeAs() függvénnyel eltárolja a storgage mappa 'public' almappájában. Az adatokat visszaküldi a FileResource használatával, majd 'Sikeres felvétel' üzenetet ad vissza.
 
     destroy()
     Feladata törölni a kiválasztott id-hoz tartalmazó képet/leírást. 
@@ -173,8 +177,7 @@ Metódusok:
     Sikeres törlés esetén "Sikeresen törölve" üzenetet ad vissza. Ha nem létezik a kép a storage mappában akkor is törli a az adatbáziban lévő kiválaszott adatot, hiba üzenetként "Nem létezik ilyen kép a storage mappában" ad vissza.
 
     countFile()
-     Feladata vissza adni a felhasználónak az eddig felvett összes adatát. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével. majd select() metódussal lekérdezi a files táblából az id-kat, majd ezt követően count() metódus segítségével meszámolja a lekérdezett adatokat. 
-
+    Feladata vissza adni a felhasználónak az eddig felvett összes adatát. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével. majd select() metódussal lekérdezi a files táblából az id-kat, majd ezt követően count() metódus segítségével meszámolja a lekérdezett adatokat. 
 
 ## NoteController
 Metódusok:
@@ -184,32 +187,46 @@ Metódusok:
 
     store()
     Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál.
-    $id = Auth::user()->getId() -> új kép sikeres felvétele esetén, a bejelentkezett felhasználó id-ját eltárolja $id-ban majd ezt kapja meg a user_id.
-    A metódus Request objektumot kap, melynek note mezője elvárt. Ha a validáció sikertelen, akkor egy hiba üzenet kerül vissza küldésre sendError() metódussal. Sikeres validáció ésetén létrehoza a felvett 'teendőt' majd az adatokat visszaküldi a NoteResource használatával, majd 'sikeres feltöltés' üzenetet ad vissza.
+    $id = Auth::user()->getId() -> új note sikeres felvétele esetén, a bejelentkezett felhasználó id-ját eltárolja $id-ban majd ezt kapja meg a user_id.
+    A metódus Request objektumot kap, melynek note mezője elvárt. Ha a validáció sikertelen, akkor egy hiba üzenet kerül vissza küldésre sendError() metódussal. Sikeres validáció ésetén létrehoza a felvett 'teendőt' majd az adatokat visszaküldi a NoteResource használatával, majd 'Sikeres feltöltés' üzenetet ad vissza.
 
     destroy()
     Feladata törölni a kiválasztott id-hoz tartalmazó 'teendőt'. 
     Sikeres törlés esetén "Note sikeresen törölve" üzenetet ad vissza. Ha nem létezik ilyen id-jú note akkor hibára fut.
 
     countNotes()
-     Feladata vissza adni a felhasználónak az eddig felvett összes adatát. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével. majd select() metódussal lekérdezi a files táblából az id-kat, majd ezt követően count() metódus segítségével meszámolja a lekérdezett adatokat. 
+    Feladata vissza adni a felhasználónak az eddig felvett összes adatát. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével. select() metódussal lekérdezi a files táblából az id-kat, majd ezt követően count() metódus segítségével meszámolja a lekérdezett adatokat. 
 
 ## SubjectController
 Metódusok:
 
     index()
-
-    update()
+    Feladata vissza adni a felhasználónak az eddig felvett összes adatát. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó megkapja az eddig felvett teendőit. Ha hamis , a felhasználó nincs bejelentkezve, tehát nem érkeznek meg az adatai.
+    Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével, majd get() metódus lekéri az adatbázis táblából a user_id-hoz tartozó összes adatot.
 
     store()
+    Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál.
+    $id = Auth::user()->getId() -> új subjet,grade sikeres felvétele esetén, a bejelentkezett felhasználó id-ját eltárolja $id-ban majd ezt kapja meg a user_id.
+    A metódus Request objektumot kap, melynek subject,grade mezője elvárt. Ha a validáció sikertelen, akkor egy hiba üzenet kerül vissza küldésre sendError() metódussal 'Hiba!, Sikertelen felvétel'. Sikeres validáció ésetén létrehoza a felvett (subject, grade) majd az adatokat visszaküldi a SubjectResource használatával, majd 'Sikeres felvétel' üzenetet ad vissza.
+
+    update()
+    Feladata a kiválasztott id-hoz tartozó adatok frissítése (módosítása). A metódus Request objektumot kap, melynek subject, grade mezője elvárt. Ha a validáció sikertelen, akkor egy hiba üzenet kerül vissza küldésre sendError() metódussal 'Hiba! Szerkeztés sikertelen'. Ha a megadott adatok helyesek , akkor $request által kapott adatok alapján az adatbázis táblában frissíti a kiválasztott id-jú adatokat, majd vissza tér a frissített adattal.
 
     destroy()
+    Feladata törölni a kiválasztott id-hoz tartalmazó 'subjet, grade' adatot. 
+    Sikeres törlés esetén "Tantárgy törölve" üzenetet ad vissza. Ha nem létezik ilyen id-jú note akkor hibára fut.
 
     avarageAllSubject()
+    Feladata vissza adni a felhasználónak az eddig feddigi felvett tantárgyainak átlagát. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával 2 darab lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével.Az egyik lekérdezés sum() metódus segítségével összeadja a grade mező számait.
+    A másik lekérdezés select() metódussal lekérdezi a subjects táblából a grade-eket, majd ezt követően count() metódus segítségével meszámolja a lekérdezett adatokat. 
+    Az eltárolt eredmények, egy $arg változóban vannak eltárolva, melyben átlag számítási képlet van alkalmazva. A round() metódus segítségével 2 tizedesjegyre kerekíti a kapott eredmény, majd ezzel tér vissza.
 
     mySubject()
+    Feladata vissza adni a felhasználónak az eddigi felvett tantárgyainak visszaadása. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével. A select() metódussal lekérdezi a subjects táblából a subject-eket, majd ezt követően groupBy() metódus segítségével csoportosítja 'subject-ek' alapján a lekérdezett adatokat. A metódus a kapott eredménnyel tér vissza.
 
     avgGradeFromAddSubjects()
+    Feladata vissza adni a felhasználónak az eddig felvett jegyeinek átlagát tantárgyaként. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével. A select() metódussal lekérdezi a subjects táblából a subject-eket és a user_id-kat. DB::raw metódussal átlagszámítás alkalmazása, jegy darabszám meghatározása ('(sum(grade)/count(subject))as atlag, count(subject) as jegydb'), majd ezt követően groupBy() metódus segítségével csoportosítja 'subject-ek' és a 'user_id-k' alapján a lekérdezett adatokat. A metódus a kapott eredménnyel tér vissza a végén.
+
 
 ## Útvonalak
 
