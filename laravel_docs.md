@@ -180,6 +180,9 @@ Metódusok:
     Feladata vissza adni a felhasználónak az eddig felvett összes adatát. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével. majd select() metódussal lekérdezi a files táblából az id-kat, majd ezt követően count() metódus segítségével meszámolja a lekérdezett adatokat. 
 
 ## NoteController
+
+    A NoteController osztály végzi a teendők megjelenítését, felvételét, törlését a felhasználó számára, illetve a felvett teendők megszámlálásának lekérdezését.
+
 Metódusok:
 
     index()
@@ -198,6 +201,9 @@ Metódusok:
     Feladata vissza adni a felhasználónak az eddig felvett összes adatát. Auth::check() -> a bejelentkezett felhasználó ellenőrzésére szolgál. Ha a visszatérési érték igaz lesz , akkor az aktuális felhasználó adataival tér vissza. Query Builder használatával lekérdezés történik. A where() metódusnak megadott feltétel ('user_id'=>$user_id ), arra szolgál, hogy csak azokat a rekordokat keresi, amelyeknek a 'user_id' mezője megegyezik a '$user_id' változó értékével. select() metódussal lekérdezi a files táblából az id-kat, majd ezt követően count() metódus segítségével meszámolja a lekérdezett adatokat. 
 
 ## SubjectController
+    
+    A SubjectController osztály végzi a tantárgyak + jegyek megjelenítését, felvételét, frissítését, törlését , illetve a felhasználó számára való átlag, tantárgy lekérdezést.
+
 Metódusok:
 
     index()
