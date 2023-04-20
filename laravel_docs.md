@@ -76,12 +76,18 @@ A backend egy olyan php alapú laravel keretrendszerben elkészített alkalamzá
         |-tests/
         |-vendor/
 ## Létrehozott kontrollerek:
-    * AdminController - Az admin authentikációt kezeli.
-    * AuthController - A user authentikációt kezeli, admin számára user adatokat szűr (tanulók adatai,iskolák, átlag életkor, nemek aránya, ).
-    * BaseController - Üzenet küldésre szolgál.
-    * FileController - Képek/leírások megjelenítésére, felvételére(tárolására),felhasználó általl felvett mennyiség megjelenítése és törlésére szolgál.
-    * NoteController - Jegyzet megjelenítésére, felvételére, felhasználó általl felvett mennyiség megjelenítése és törlésre szolgál.
-    * SubjectController - tantárgy/jegyek megjelenítése , felvétele, módosítása, törlése, a felhasználó adatainak szűrése(bejelentkezett felhasználó felvett tantárgyai/jegyei, össz átlagának/ tantárgyankénti átlag meghatározás, eltárolt tantárgyainak megjelenítése) a feladata.
+
+> AdminController - Az admin authentikációt kezeli.
+>
+> AuthController - A user authentikációt kezeli, admin számára user adatokat szűr (tanulók adatai,iskolák, átlag életkor, nemek aránya, ).
+>
+> BaseController - Üzenet küldésre szolgál.
+>
+> FileController - Képek/leírások megjelenítésére, felvételére(tárolására),felhasználó általl felvett mennyiség megjelenítése és törlésére szolgál.
+>
+> NoteController - Jegyzet megjelenítésére, felvételére, felhasználó általl felvett mennyiség megjelenítése és törlésre szolgál.
+>
+> SubjectController - tantárgy/jegyek megjelenítése , felvétele, módosítása, törlése, a felhasználó adatainak szűrése(bejelentkezett felhasználó felvett tantárgyai/jegyei, össz átlagának/ tantárgyankénti átlag meghatározás, eltárolt tantárgyainak megjelenítése) a feladata.
 
 Az adatbázis feltöltése insomnian keresztűl történik, mely a documnetáció mellett a projekthez elkészített insomnia fájl másolata is megtalálható.
 
@@ -116,7 +122,7 @@ Az authentikáció érdekében Sanctum csomag lett feltelepítve
 
     Az AuthController osztály végzi a regisztrációt, bejelentkezést, kijelentekzést és az admin számára adatok lekérdezését.
 
- Metódusok: 
+ Metódusok:
 
     login()
     Célja a felhasználó bejelentkeztetése. A bejelentkezési folyamat során megadott email cím és jelszó ellenőrzése történik meg, majd a megfelelő adatok esetén az alkalmazás belépteti a felhasználót.A metódus egy Request objektumot kap, mely tartalmazza a bejelentkezéshez szükséges adatokat, email cím, jelszó. Ha a felhasználó megadott adatai nem megfelelőek, akkor a login metódus hibára fut, és hiba üzenetet ad.
