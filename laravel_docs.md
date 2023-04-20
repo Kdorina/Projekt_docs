@@ -1,6 +1,10 @@
 # Felhasználói dokumentáció
 
 
+## Projekt elérés
+| HELY | URL |
+| ------ | ------ |
+| GitHub | https://github.com/Kdorina/Projekt_laravel|
 ## Backend indítás előtti teendők
 
     cmd —> terminál megnyítása
@@ -14,6 +18,11 @@
 ## A backend indítása / ahoz szükséges parancsok
 
     php artisan serve
+
+Ezen a porton fog futni a program.
+```sh
+127.0.0.1:8000
+```
 
 ## Backend projekt könyvtárszerkezet
 A backend egy olyan php alapú laravel keretrendszerben elkészített alkalamzás, melyet REST API szolgál ki.
@@ -119,18 +128,29 @@ Az authentikáció érdekében Sanctum csomag lett feltelepítve
     Feladata a felhasználó kijelentkeztetése az alkalmazásból. CurrentAccessToken() metódus meghívásával , megtalálja az aktuális felhasználóhoz hozzátartózó tokent, majd azt az adatbáziból kitörli. Sikeres kijelentekztetés esetén , üzenettel tér vissza.
 
     getUsers()
+    Feladata az adatbázis táblában szereplő felhasználók listájának vissza adása.
 
     countUsers()
+    Feladata a users adatbázis táblában eltárolt felhasználók megszámlálása. Query Builder használatával lekérdezés történik. table() metódus a megadott 'users' adatbázis táblában keres. Select() metódussal id-ra szűr, majd count('id') metódus megszámlálja az összes felhasználó id-ját. A $sum-ban eltárolt adattal tér vissza.
 
     userAvgAge()
+    Feladata az admin oldalhoz való felhasználás érdekében a felhasználók átlag korának lekérdezése. Builder használatával lekérdezés történik. Select() metódusban sql lekérdezés van alkalmazva adatbázis táblában keres. SELECT ROUND(AVG(YEAR(CURDATE())-Year(date_of_birth))) as "kor" FROM users -> CURDATE() az aktuális dátumot adja vissza melyet a YEAR() metódus csak az év értéket adja vissza, majd a regisztráció során megadott 'date_of_birth' dátum Year() metódusba helyezése, mely szintén csak az évet veszi figyelembe. Az így kapott két évszám kivonásra kerül egymásból. Avg() metódussal a kapott számot átlagolja, round() metódus pedig kerekíti az értéket, majd az így kapott számmal tér vissza mint "kor".
 
     getWomens()
+    Női felhasználók lekérdezése Admin oldalhoz való felhasználás érdekében.
+    Builder használatával lekérdezés történik. table() metódus a megadott 'users' adatbázis táblában keres. Where() metódus a megadott feltételek alapján keres ("gender, "nő") .Select() metódussal id-ra szűr. Így megkapjuk az összes női felhasználót, majd a kapott adatot count() metódus segítségével az összes női felhasználó id-ját megszámlálja, és visszatér vele.
 
     getMens()
+    Férfi felhasználók lekérdezése Admin oldalhoz való felhasználás érdekében.
+    Builder használatával lekérdezés történik. table() metódus a megadott 'users' adatbázis táblában keres. Where() metódus a megadott feltételek alapján keres ("gender, "férfi") .Select() metódussal id-ra szűr. Így megkapjuk az összes férfi felhasználót, majd a kapott adatot count() metódus segítségével az összes férfi felhasználó id-ját megszámlálja, és visszatér vele.
 
     getElse()
+    Egyéb felhasználók lekérdezése Admin oldalhoz való felhasználás érdekében.
+    Builder használatával lekérdezés történik. table() metódus a megadott 'users' adatbázis táblában keres. Where() metódus a megadott feltételek alapján keres ("gender, "egyéb") .Select() metódussal id-ra szűr. Így megkapjuk az összes egyéb felhasználót, majd a kapott adatot count() metódus segítségével az összes egyéb felhasználó id-ját megszámlálja, get() metódus vissza adja az értékeket.
 
     allBuilding()
+    Feladata a felhasználók által megadott intézmények lekérdezése.
+    Builder használatával lekérdezés történik. table() metódus a megadott 'users' adatbázis táblában keres. Select() metódus "buildingName" -re, mely a regisztráció során felvett intézmény neveire szűr. GroupBy() metódus a kapott adatokat csoportosítja "buildingName" szerint, majd vissza tér az eredménnyel.
     
     
 
