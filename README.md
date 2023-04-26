@@ -6,7 +6,7 @@
 
 ## Használt technológiák
 * Laravel
-* MYSQL szerver
+* MariaDB szerver
 
 ## Projekt elérés
 | Leírás | HELY | URL |
