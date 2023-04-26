@@ -12,7 +12,7 @@
 | Leírás | HELY | URL |
 | ------ | ------ | ------ |
 |Backend projekt | GitHub | https://github.com/Kdorina/Projekt_laravel|
-|Insomnia fájl a projekthez |Github| https://github.com/Kdorina/Projekt_laravel|
+|Insomnia fájl a projekthez |Github| https://github.com/Kdorina/Vizsgaremek_backend/tree/master/insomnia|
 
 ## Backend indítás előtti teendők
 
