@@ -1,4 +1,5 @@
 # Felhasználói dokumentáció
+## Backend - Diák Felhő
 
 ## Projekt leírás
 * Tanulók számára készített almalmazás, mely bíztosítja számukra az aznap kapott jegyük/teendőik/jegyzeteikről készített képek tárolását, azoknak a módosítását, esetleges törlését és a statisztikai adatok visszajelzését. Ez álltal a tanuló vissza tudja követni kapott jegyeit és tiszában van tanulmányi eredményéről.
